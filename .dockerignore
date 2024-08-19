@@ -1,0 +1,9 @@
+target/
+src/test/*
+
+Dockerfile
+*.bak
+*.md
+*.yml
+mvnw
+mvnw.cmd
