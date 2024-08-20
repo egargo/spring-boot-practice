@@ -1,9 +1,20 @@
+.git
+.settings
+
+Dockerfile
+docker-compose.yml
+docker-compose.yaml
+compose.yml
+compose.yaml
+.dockerignore
+
+.env
+env.example
+
+mvnw
+mvnw.cmd
+
 target/
 src/test/*
 
-Dockerfile
-*.bak
 *.md
-*.yml
-mvnw
-mvnw.cmd
