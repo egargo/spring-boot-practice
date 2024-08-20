@@ -1,23 +1,23 @@
 services:
     spring-db:
         image: postgres
-        container_name: spring-boot-db
+        container_name: clint-don.spring-boot-crud-db
         environment:
           - POSTGRES_USER=${POSTGRES_USER}
           - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
           - POSTGRES_DB=${POSTGRES_DB}
           - PGPORT=${PGPORT}
-        command: postgres -c 'max_connections=1000'
-        expose:
-            - 5433
+        command: postgres -c 'max_connections=100'
         ports:
             - 5433:5432
+        expose:
+            - 5433
         volumes:
-            - spring-docker-data:/var/lib/postgresql
+            - spring-boot-crud-data:/var/lib/postgresql
 
-    spring:
-        image: ghcr.io/egargo/spring-boot-crud
-        container_name: spring-boot-crud
+    spring-boot:
+        image: ghcr.io/egargo/clint-don.spring-boot-crud-app
+        container_name: clint-don.spring-boot-crud-app
         build:
             context: .
         ports:
@@ -25,9 +25,9 @@ services:
         depends_on:
             - spring-db
         environment:
-            - SPRING_DATA_SOURCE_URL=${SPRING_DATA_SOURCE_URL}
+            - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
             - SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME}
             - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
 
 volumes:
-    spring-docker-data:
+    spring-boot-crud-data:
