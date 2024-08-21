@@ -60,8 +60,15 @@ public class UserController {
 	@PutMapping(value = { "", "/" }, consumes = "application/json", produces = "application/json")
 	public ResponseEntity<?> updateUser(@RequestParam Long id, @RequestBody UserCreateDTO userCreateDTO) {
 		try {
-			userService.updateUser(id, userCreateDTO);
-			return new ResponseEntity<>("Successfully updated user", HttpStatus.OK);
+			Integer u = userService.updateUser(id, userCreateDTO);
+
+			switch (u) {
+				case 0:
+					return new ResponseEntity<>("Successfully updated user", HttpStatus.OK);
+				default:
+					return new ResponseEntity<>("Failed to update user", HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+
 		} catch (Exception e) {
 			System.out.println("Error: " + e);
 			return new ResponseEntity<>("An unexpected error occurred", HttpStatus.INTERNAL_SERVER_ERROR);
