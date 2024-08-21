@@ -7,34 +7,36 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Data;
 
 @Data
-@Entity(name = "users")
+@Entity(name = "User")
+@Table(name = "users")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false, unique = true)
-	private Long id;
+	public Long id;
 
 	@Column(name = "first_name", nullable = false, unique = false)
-	private String firstName;
+	public String firstName;
 
 	@Column(name = "middle_name", nullable = false, unique = false)
-	private String middleName;
+	public String middleName;
 
 	@Column(name = "last_name", nullable = false, unique = false)
-	private String lastName;
+	public String lastName;
 
 	@Column(name = "user_name", nullable = false, unique = true)
-	private String userName;
+	public String userName;
 
 	@Column(name = "email", nullable = false, unique = true)
-	private String email;
+	public String email;
 
 	@Column(name = "password", nullable = false, unique = false)
-	private String password;
+	public String password;
 
 	@Column(name = "date_registered", nullable = false, unique = false)
-	private LocalDateTime dateRegistered;
+	public LocalDateTime dateRegistered;
 }
