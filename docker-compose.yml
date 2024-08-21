@@ -1,6 +1,6 @@
 services:
     spring-db:
-        image: postgres
+        image: postgres:alpine
         container_name: clint-don.spring-boot-crud-db
         environment:
           - POSTGRES_USER=${POSTGRES_USER}
