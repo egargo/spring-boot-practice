@@ -1,5 +1,11 @@
-.git
-.settings
+.git/
+.settings/
+
+target/
+src/test/*
+
+mvnw
+mvnw.cmd
 
 Dockerfile
 docker-compose.yml
@@ -8,12 +14,7 @@ compose.yml
 compose.yaml
 .dockerignore
 
-env.example
-
-mvnw
-mvnw.cmd
-
-target/
-src/test/*
-
+*.json
 *.md
+
+env.example
