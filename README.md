@@ -1,5 +1,8 @@
 # Apollotech Training: Learning Docker and Docker Compose
 
+Dockerized Spring Boot CRUD API with PostgreSQL
+
+
 ```bash
 # Pull the Spring Boot project Docker image from GHCR.
 docker pull ghcr.io/egargo/spring-boot-crud
