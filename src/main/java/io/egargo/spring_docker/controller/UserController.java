@@ -34,7 +34,6 @@ public class UserController {
 		} catch (Exception e) {
 			return new ResponseEntity<>("An unexpected error occurred: " + e, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
 	}
 
 	@GetMapping(value = { "/{id}" }, produces = "application/json")
