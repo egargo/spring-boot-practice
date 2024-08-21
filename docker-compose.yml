@@ -1,7 +1,7 @@
 services:
     spring-db:
         image: postgres:alpine
-        container_name: clint-don.spring-boot-crud-db
+        container_name: egargo.spring-boot-crud-db
         environment:
           - POSTGRES_USER=${POSTGRES_USER}
           - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
@@ -16,8 +16,8 @@ services:
             - spring-boot-crud-data:/var/lib/postgresql
 
     spring-boot:
-        image: ghcr.io/egargo/clint-don.spring-boot-crud-app
-        container_name: clint-don.spring-boot-crud-app
+        image: ghcr.io/egargo/egargo.spring-boot-crud-app
+        container_name: egargo.spring-boot-crud-app
         build:
             context: .
         ports:
