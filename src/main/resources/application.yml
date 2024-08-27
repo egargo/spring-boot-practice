@@ -1,0 +1,28 @@
+spring:
+    config:
+        import: optional:file:.env[.properties]
+    application:
+        name: spring-docker
+    datasource:
+        url: ${SPRING_DATASOURCE_URL}
+        username: ${SPRING_DATASOURCE_USERNAME}
+        password: ${SPRING_DATASOURCE_PASSWORD}
+        driverClassName: org.postgresql.Driver
+        hikari:
+            maximum-pool-size: 1000
+    h2:
+        console:
+            enable: true
+    jpa:
+        database: postgresql
+        properties:
+            hibernate:
+                boot:
+                    allow_jdbc_metadata_access: false
+                jdbc:
+                    time_zone: Asia/Manila
+        hibernate:
+            ddl-auto: update
+
+server:
+    port: 8888
