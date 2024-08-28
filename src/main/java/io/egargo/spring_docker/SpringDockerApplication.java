@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = { "io.egargo.spring_docker.repository" })
 @EnableAutoConfiguration
-@EntityScan("io.egargo.spring_docker.entity")
+@EntityScan("io.egargo.spring_docker.model")
 public class SpringDockerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringDockerApplication.class, args);

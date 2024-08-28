@@ -8,7 +8,7 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 import io.egargo.spring_docker.dto.UserCreateDTO;
 import io.egargo.spring_docker.dto.UserDTO;
 import io.egargo.spring_docker.dto.UserUpdateDTO;
-import io.egargo.spring_docker.entity.User;
+import io.egargo.spring_docker.model.User;
 
 @Service
 public class UserDTOMapper {

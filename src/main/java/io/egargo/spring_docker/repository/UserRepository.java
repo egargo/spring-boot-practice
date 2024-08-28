@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 
 import io.egargo.spring_docker.dto.UserCreateDTO;
 import io.egargo.spring_docker.dto.UserDTO;
-import io.egargo.spring_docker.entity.User;
+import io.egargo.spring_docker.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 	@Modifying

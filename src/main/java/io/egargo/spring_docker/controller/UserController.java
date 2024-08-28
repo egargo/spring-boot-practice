@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.egargo.spring_docker.dto.UserCreateDTO;
-import io.egargo.spring_docker.entity.User;
+import io.egargo.spring_docker.model.User;
 import io.egargo.spring_docker.mapper.UserDTOMapper;
 import io.egargo.spring_docker.service.UserService;
 import io.egargo.spring_docker.utils.UtilEnumResult;
