@@ -1,4 +1,4 @@
-package io.egargo.spring_docker.entity;
+package io.egargo.spring_docker.model;
 
 import java.time.LocalDateTime;
 
