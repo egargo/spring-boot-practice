@@ -3,6 +3,7 @@ package io.egargo.spring_docker;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.Random;
 
 import org.junit.jupiter.api.AfterEach;
@@ -60,12 +61,12 @@ class SpringDockerApplicationTests {
 		userRepository.save(newUser);
 		Long id = newUser.getId();
 
-		User user = userRepository.getById(id);
+		Optional<User> user = userRepository.findById(id);
 		Savings savings = new Savings();
 
 		double randomBal = Math.random();
 
-		savings.setUser(user);
+		savings.setUser(user.get());
 		savings.setBalance(randomBal);
 
 		savingsRepository.save(savings);
