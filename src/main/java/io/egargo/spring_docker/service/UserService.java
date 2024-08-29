@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,8 +25,8 @@ public class UserService {
 	@Autowired
 	UserDTOMapper userDTOMapper;
 
-	public List<UserDTO> getAll() {
-		return userRepository.getAllUsers();
+	public List<UserDTO> getAll(Pageable pageable) {
+		return userRepository.getAllUsers(pageable).getContent();
 	}
 
 	public Optional<UserDTO> getById(Long id) {
