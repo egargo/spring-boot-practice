@@ -1,8 +1,9 @@
 package io.egargo.spring_docker.repository;
 
-import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -30,7 +31,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 			") " +
 			"FROM User u " +
 			"ORDER BY u.id")
-	List<UserDTO> getAllUsers();
+	Page<UserDTO> getAllUsers(Pageable pageable);
 
 	@Query("SELECT " +
 			"new io.egargo.spring_docker.dto.UserDTO(" +
