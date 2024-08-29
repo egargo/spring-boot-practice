@@ -3,6 +3,8 @@ package io.egargo.spring_docker.controller;
 import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,9 +33,9 @@ public class UserController {
 	UserDTOMapper userDTOMapper;
 
 	@GetMapping(value = { "", "/" }, produces = "application/json")
-	public ResponseEntity<?> getAllUser() {
+	public ResponseEntity<?> getAllUser(@PageableDefault(size = 10, page = 1) Pageable pageable) {
 		try {
-			return new ResponseEntity<>(Collections.singletonMap("data", userService.getAll()),
+			return new ResponseEntity<>(Collections.singletonMap("data", userService.getAll(pageable)),
 					HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(Collections.singletonMap("message", "An unexpected error occurred"),
