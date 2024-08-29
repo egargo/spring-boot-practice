@@ -10,6 +10,10 @@ spring:
         driverClassName: org.postgresql.Driver
         hikari:
             maximum-pool-size: 1000
+    data:
+        web:
+            pageable:
+                one-indexed-parameters: true
     h2:
         console:
             enable: true
@@ -23,6 +27,16 @@ spring:
                     time_zone: Asia/Manila
         hibernate:
             ddl-auto: update
+    kafka:
+        consumer:
+            group-id: my-group-id
+            bootstrap-servers: localhost:9092
+            key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+            value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+        producer:
+            bootstrap-servers: localhost:9092
+            key-serializer: org.apache.kafka.common.serialization.StringSerializer
+            value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
 server:
     port: 8888
