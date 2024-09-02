@@ -36,8 +36,6 @@ public class AuthService {
 		map.get().put("accessToken", accessToken);
 		map.get().put("refreshToken", refreshToken);
 
-		System.out.println("'" + refreshToken + "'");
-
 		return map;
 	}
 }
