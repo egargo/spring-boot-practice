@@ -13,4 +13,7 @@ cp env.example .env
 
 # Build and Spring Boot project and Postgres.
 docker compose up -d
+
+# Run tests
+mvn clean && mvn -Dtest=SpringDockerApplicationTests test
 ```
