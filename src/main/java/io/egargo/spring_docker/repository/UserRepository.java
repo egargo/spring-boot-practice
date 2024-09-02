@@ -40,4 +40,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 			"FROM User u " +
 			"WHERE u.id = :id")
 	Optional<UserDTO> getUserById(@Param("id") Long id);
+
+	@Query("SELECT password " +
+			"FROM User u " +
+			"WHERE u.userName = :userName")
+	Optional<String> checkUserLogin(@Param("userName") String userName);
 }
