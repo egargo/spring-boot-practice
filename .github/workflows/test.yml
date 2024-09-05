@@ -1,0 +1,20 @@
+name: Test Action
+
+on:
+    push:
+        - '*'
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout
+              uses: actions/checkout@v4
+            - name: setup java
+              uses: actions/@setup-java@v4
+              with:
+                java-version: '21'
+                distribution: 'temurin'
+                architecture: x64
+            - name: run tests
+              run: mvn clean && mvn -Dtest=SpringDockerApplicationTests test
