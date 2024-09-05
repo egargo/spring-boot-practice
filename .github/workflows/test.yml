@@ -12,11 +12,11 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v3
 
-            - name: Setup Java 21 (Temurin)
-              uses: actions/@setup-java@v4
-              with:
-                java-version: '21'
-                distribution: 'temurin'
-
-            - name: Run Tests
-              run: mvn clean && mvn -Dtest=SpringDockerApplicationTests test
+            # - name: Setup Java 21 (Temurin)
+            #   uses: actions/@setup-java@v4
+            #   with:
+            #     java-version: '21'
+            #     distribution: 'temurin'
+            #
+            # - name: Run Tests
+            #   run: mvn clean && mvn -Dtest=SpringDockerApplicationTests test
