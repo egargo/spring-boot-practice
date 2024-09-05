@@ -2,7 +2,8 @@ name: Test Action
 
 on:
     push:
-        - '*'
+        branches:
+            - '*'
 
 jobs:
     test:
