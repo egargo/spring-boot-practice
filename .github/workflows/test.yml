@@ -9,9 +9,9 @@ jobs:
     test:
         runs-on: ubuntu-latest
         steps:
-            - name: checkout
-              uses: actions/checkout@v4
-            - name: setup java
+            - name: Checkout
+              uses: actions/checkout@v3
+            - name: Setup Java 21 (Temurin)
               uses: actions/@setup-java@v4
               with:
                 java-version: '21'
