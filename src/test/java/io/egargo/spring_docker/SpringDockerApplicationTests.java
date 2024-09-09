@@ -20,7 +20,6 @@ import io.egargo.spring_docker.repository.UserRepository;
 
 @SpringBootTest
 class SpringDockerApplicationTests {
-
 	@Autowired
 	private UserRepository userRepository;
 
