@@ -34,7 +34,7 @@ public class AuthController {
 			return new ResponseEntity<>(Collections.singletonMap("data", authService.login(userLogin)), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(
-					Collections.singletonMap("message", "An unexpected error occurred: " + e),
+					Collections.singletonMap("message", "An unexpected error occurred"),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
