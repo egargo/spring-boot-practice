@@ -2,6 +2,19 @@
 
 Dockerized Spring Boot CRUD API with PostgreSQL
 
+- [x] Spring Security
+- [x] Authentication
+- [x] Docker
+    - [x] Dockerfile
+    - [x] docker-compose.yml
+- [ ] GitHub Actions
+    - [x] Workflow file
+    - [ ] Todo fix H2 in-memory DB
+- [x] JWT
+- [x] Bcrypt
+- [x] DB Migration
+- [x] Table relationship
+
 
 ```bash
 # Pull the Spring Boot project Docker image from GHCR.
@@ -16,4 +29,10 @@ docker compose up -d
 
 # Run tests
 mvn clean && mvn -Dtest=SpringDockerApplicationTests test
+
+# Build without running the tests
+mvn clean install -Dmaven.test.skip=true -q
+
+# Run the built jar file
+javar -jar target/
 ```
