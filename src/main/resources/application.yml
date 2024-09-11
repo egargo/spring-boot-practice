@@ -47,12 +47,5 @@ server:
 security:
     jwt:
         secret-key: ${SPRING_SECURITY_JWT_SECRET_KEY}
-        # secret-key: gatj5MGWFdF9tvSg5tYNYOnCTMbBGyQdij4UJBXMnKHxTHEBiukrY1M0WPQBBm1kR6XNuCqDPQ6HGHib8bqUjbvS1PUxW4FjGGsZHGOAxA8andmCqbyvc1gggSzYohXfMCXH2zwKiB71If61jCGmM5fdNAJLlz3SPH9a7rMHFKGy5rqcRFkx9GH2OTFBhdV5vANnYIdRll4tcINFm6s0WWqLQeM1WoGNLBBtrq0EOfyTqQnDKeCGDJAwKjsNQQuPeY5wKyjPGvdvMoO6TIbkYCum6TOXPV2KDWuVhIWwnGpPyhX0dnMx2xzCPPNzn6J12dgKPp16dM2BA==
-        # 15 * 60 * 1000
         access-expiration-time: ${SPRING_SECURITY_JWT_ACCESS_EXP}
-        # access-expiration-time: 900000
-
-        # 60 * 60 * 1000 -> minutes
-        # 60 * 60 * 24 * 1000 -> hours
         refresh-expiration-time: ${SPRING_SECURITY_JWT_REFRESH_EXP}
-        # refresh-expiration-time: 86400000
