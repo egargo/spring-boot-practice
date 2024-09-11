@@ -2,14 +2,18 @@ package io.egargo.spring_docker.model;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Cacheable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+@Cacheable
 @Data
 @Entity(name = "User")
 @Table(name = "users")
@@ -33,6 +37,10 @@ public class User {
 
 	@Column(name = "email", nullable = false, unique = true)
 	public String email;
+
+	@Column(name = "role", nullable = false, unique = false)
+	@Enumerated(EnumType.STRING)
+	public UserRole role;
 
 	@Column(name = "password", nullable = false, unique = false)
 	public String password;
