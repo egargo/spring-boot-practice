@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import io.egargo.spring_docker.dto.UserCheckDTO;
 import io.egargo.spring_docker.dto.UserCreateDTO;
 import io.egargo.spring_docker.dto.UserDTO;
 import io.egargo.spring_docker.model.User;
@@ -41,8 +42,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
 			"WHERE u.id = :id")
 	Optional<UserDTO> getUserById(@Param("id") Long id);
 
-	@Query("SELECT password " +
-			"FROM User u " +
+	@Query("SELECT\n" +
+			"new io.egargo.spring_docker.dto.UserCheckDTO(\n" +
+			"\tu.userName, u.email, u.role, u.password\n" +
+			")\n" +
+			"FROM User u\n" +
 			"WHERE u.userName = :userName")
-	Optional<String> checkUserLogin(@Param("userName") String userName);
+	Optional<UserCheckDTO> checkUserLogin(@Param("userName") String userName);
 }
