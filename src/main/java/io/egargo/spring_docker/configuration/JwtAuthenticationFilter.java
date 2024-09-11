@@ -38,7 +38,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
 			String token = authorizationHeader.split("Bearer ")[2].trim();
 			String username = map.convertValue(jwtUtil.extractAllClaims(token).get("data"), JwtClaim.class)
-					.getUsername();
+					.getUserName();
 
 			if (username != null & jwtUtil.verifyToken(token) == true) {
 				SecurityContextHolder.getContext()
