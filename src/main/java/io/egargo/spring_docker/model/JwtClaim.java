@@ -7,5 +7,7 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties
 public class JwtClaim {
-	public String username;
+	public String userName;
+	public String email;
+	public String role;
 }
