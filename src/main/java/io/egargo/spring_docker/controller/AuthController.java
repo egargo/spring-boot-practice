@@ -31,7 +31,7 @@ public class AuthController {
 						HttpStatus.NOT_FOUND);
 			}
 
-			return new ResponseEntity<>(Collections.singletonMap("data", authService.login(userLogin)), HttpStatus.OK);
+			return new ResponseEntity<>(Collections.singletonMap("data", result), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(
 					Collections.singletonMap("message", "An unexpected error occurred"),
