@@ -8,7 +8,9 @@ import javax.crypto.SecretKey;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import io.egargo.spring_docker.dto.UserCheckDTO;
 import io.egargo.spring_docker.model.JwtClaim;
+import io.egargo.spring_docker.model.User;
 import io.egargo.spring_docker.model.UserLogin;
 
 import io.jsonwebtoken.Claims;
@@ -27,13 +29,11 @@ public class JwtUtil {
 	@Value("${security.jwt.refresh-expiration-time}")
 	private long tokenRefreshExp;
 
-	private SecretKey getSignedKey() {
-		return Keys.hmacShaKeyFor(Decoders.BASE64.decode(tokenSecretKey));
-	}
-
-	public String generateAccessToken(final UserLogin userLogin) {
-		JwtClaim claim = new JwtClaim();
-		claim.setUsername(userLogin.userName);
+	public String generateAccessToken(final UserCheckDTO user) {
+		final JwtClaim claim = new JwtClaim();
+		claim.setUserName(user.userName);
+		claim.setEmail(user.email);
+		claim.setRole(user.role.toString());
 
 		return Jwts.builder()
 				.claim("data", claim)
@@ -42,9 +42,11 @@ public class JwtUtil {
 				.signWith(this.getSignedKey()).compact().toString();
 	}
 
-	public String generateRefreshToken(final UserLogin userLogin) {
-		JwtClaim claim = new JwtClaim();
-		claim.setUsername(userLogin.userName);
+	public String generateRefreshToken(final UserCheckDTO user) {
+		final JwtClaim claim = new JwtClaim();
+		claim.setUserName(user.userName);
+		claim.setEmail(user.email);
+		claim.setRole(user.role.toString());
 
 		return Jwts.builder()
 				.claim("data", claim)
@@ -54,7 +56,7 @@ public class JwtUtil {
 				.compact();
 	}
 
-	public Claims extractAllClaims(String token) {
+	public Claims extractAllClaims(final String token) {
 		return Jwts.parser()
 				.verifyWith(this.getSignedKey())
 				.build()
@@ -62,7 +64,11 @@ public class JwtUtil {
 				.getPayload();
 	}
 
-	public boolean verifyToken(String token) {
+	public boolean verifyToken(final String token) {
 		return !extractAllClaims(token).getExpiration().before(new Date());
+	}
+
+	private SecretKey getSignedKey() {
+		return Keys.hmacShaKeyFor(Decoders.BASE64.decode(tokenSecretKey));
 	}
 }
