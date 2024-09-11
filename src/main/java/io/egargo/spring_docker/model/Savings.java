@@ -17,16 +17,6 @@ import lombok.Data;
 @Entity(name = "Savings")
 @Table(name = "savings")
 public class Savings implements Serializable {
-	private static Savings singleInstance;
-
-	public static synchronized Savings getInstance() {
-		if (singleInstance == null) {
-			singleInstance = new Savings();
-		}
-		System.out.println("Singleton: " + singleInstance);
-		return singleInstance;
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false, unique = true)
