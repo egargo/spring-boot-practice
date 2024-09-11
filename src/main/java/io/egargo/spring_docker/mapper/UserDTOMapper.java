@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import io.egargo.spring_docker.dto.UserCreateDTO;
 import io.egargo.spring_docker.model.User;
+import io.egargo.spring_docker.model.UserRole;
 import io.egargo.spring_docker.utils.Password;
 
 @Service
@@ -18,6 +19,7 @@ public class UserDTOMapper {
 		user.setLastName(userCreateDTO.lastName);
 		user.setUserName(userCreateDTO.userName);
 		user.setEmail(userCreateDTO.email);
+		user.setRole(UserRole.Member);
 		user.setPassword(new Password().hash(userCreateDTO.password));
 		user.setDateRegistered(LocalDateTime.now());
 
