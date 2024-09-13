@@ -9,11 +9,24 @@
 	"item": [
 		{
 			"name": "Get All Users",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "refreshToken",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJkYXRhIjp7InVzZXJuYW1lIjoidXNlcm5hbWUifSwiaWF0IjoxNzI1NDM1OTQwLCJleHAiOjE3MjU1MjIzNDB9.UXXvMg-e--O5_ihoHB9O2hLfOrJZwYeWjXqJZ-4ZdVPaKmCgUSMpjmXZPNHtxTRu4HzxbCeBV35ZRRQO9hnLIA",
+						"type": "text",
+						"disabled": true
+					}
+				],
 				"url": {
-					"raw": "0.0.0.0:8888/api/users/",
+					"raw": "0.0.0.0:8888/api/users/all?page=1",
 					"host": [
 						"0",
 						"0",
@@ -24,7 +37,13 @@
 					"path": [
 						"api",
 						"users",
-						""
+						"all"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
 					]
 				}
 			},
@@ -56,11 +75,20 @@
 		{
 			"name": "Create User",
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "refreshToken",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJkYXRhIjp7InVzZXJuYW1lIjoidXNlcm5hbWUifSwiaWF0IjoxNzI1NDM1OTQwLCJleHAiOjE3MjU1MjIzNDB9.UXXvMg-e--O5_ihoHB9O2hLfOrJZwYeWjXqJZ-4ZdVPaKmCgUSMpjmXZPNHtxTRu4HzxbCeBV35ZRRQO9hnLIA",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"firstName\": \"FirstName\",\n    \"middleName\": \"MiddleName\",\n    \"lastName\": \"LastName\",\n    \"userName\": \"username\",\n    \"email\": \"springboot@dockerized.app\",\n    \"password\": \"Password12\"\n}",
+					"raw": "{\n    \"firstName\": \"FirstName\",\n    \"middleName\": \"MiddleName\",\n    \"lastName\": \"LastName\",\n    \"userName\": \"username122\",\n    \"email\": \"springboot@dockerized122.app\",\n    \"password\": \"Password\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -68,7 +96,7 @@
 					}
 				},
 				"url": {
-					"raw": "0.0.0.0:8888/api/users/",
+					"raw": "0.0.0.0:8888/api/users/create",
 					"host": [
 						"0",
 						"0",
@@ -79,7 +107,175 @@
 					"path": [
 						"api",
 						"users",
-						""
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "refreshToken",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "0.0.0.0:8888/api/auth/refresh",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8888",
+					"path": [
+						"api",
+						"auth",
+						"refresh"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userName\": \"username\",\n    \"password\": \"Password1\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "0.0.0.0:8888/api/auth/login",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8888",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJkYXRhIjp7InVzZXJOYW1lIjoidXNlcm5hbWUxMjMiLCJlbWFpbCI6InNwcmluZ2Jvb3RAZG9ja2VyaXplZDEyLmFwcCIsInJvbGUiOiJBZG1pbiJ9LCJpYXQiOjE3MjYwMjQ2MjYsImV4cCI6MTcyNjAyNTUyNn0.BtmgA-tRC5leBhulG_7_6YC_lUu0yFjhI-auxMxsr-AV6cfGxg9V0TIdfF304nWZlyl1f6DZyxl5xq4G1Sv3QQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "0.0.0.0:8888/api/users/admin",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8888",
+					"path": [
+						"api",
+						"users",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Deposit",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user\": {\n        \"id\": 2\n    },\n    \"balance\": 999\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "0.0.0.0:8888/api/savings/deposit?id=1",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8888",
+					"path": [
+						"api",
+						"savings",
+						"deposit"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Kafka",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user\": {\n        \"id\": 3\n    },\n    \"balance\": 999\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8888/send?message=Hello",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"send"
+					],
+					"query": [
+						{
+							"key": "message",
+							"value": "Hello"
+						}
 					]
 				}
 			},
@@ -92,7 +288,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"firstName\": \"Updated First Name\",\n    \"middleName\": \"Updated Middle Name\",\n    \"lastName\": \"Updated Last Name\",\n    \"userName\": \"updated_username\",\n    \"email\": \"updated.springboot@dockerized.app\",\n    \"password\": \"UpdatedPassword12\"\n}",
+					"raw": "{\n    \"firstName\": \"Updated First Name\",\n    \"middleName\": \"Updated Middle Name\",\n    \"lastName\": \"Updated Last Name\",\n    \"userName\": \"updated_username\",\n    \"email\": \"updated.springboot@dockerized.app12\",\n    \"password\": \"UpdatedPassword12\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -100,7 +296,7 @@
 					}
 				},
 				"url": {
-					"raw": "0.0.0.0:8888/api/users/?id=1",
+					"raw": "0.0.0.0:8888/api/users/?id=2",
 					"host": [
 						"0",
 						"0",
@@ -116,7 +312,7 @@
 					"query": [
 						{
 							"key": "id",
-							"value": "1"
+							"value": "2"
 						}
 					]
 				}
@@ -129,7 +325,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "0.0.0.0:8888/api/users/1",
+					"raw": "0.0.0.0:8888/api/users/2",
 					"host": [
 						"0",
 						"0",
@@ -140,7 +336,7 @@
 					"path": [
 						"api",
 						"users",
-						"1"
+						"2"
 					]
 				}
 			},
