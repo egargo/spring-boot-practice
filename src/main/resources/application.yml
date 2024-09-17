@@ -38,8 +38,8 @@ spring:
     #         key-serializer: org.apache.kafka.common.serialization.StringSerializer
     #         value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 server:
-    # port: 28279
-    port: 8888
+    port: 28279
+    # port: 8888
     compression:
         enabled: true
         mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
