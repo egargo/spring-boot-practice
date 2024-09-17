@@ -16,4 +16,4 @@ jobs:
           java-version: '21'
           architecture: x64
       - name: run tests
-        run: ./mvnw clean && mvn -Dtest=SpringDockerApplicationTests test
+        run: mvn clean && mvn -Dtest=SpringDockerApplicationTests test
