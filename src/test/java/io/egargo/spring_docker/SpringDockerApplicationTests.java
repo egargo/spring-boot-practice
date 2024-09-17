@@ -11,14 +11,18 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.event.annotation.BeforeTestClass;
 
 import io.egargo.spring_docker.model.Savings;
 import io.egargo.spring_docker.model.User;
+import io.egargo.spring_docker.model.UserRole;
 import io.egargo.spring_docker.repository.SavingsRepository;
 import io.egargo.spring_docker.repository.UserRepository;
 
 @SpringBootTest
+@TestPropertySource("classpath:application-dev.properties")
 class SpringDockerApplicationTests {
 	@Autowired
 	private UserRepository userRepository;
@@ -36,6 +40,7 @@ class SpringDockerApplicationTests {
 		user.setLastName("Test");
 		user.setUserName("test" + randomId);
 		user.setEmail("test" + randomId + "@test.test");
+		user.setRole(UserRole.Member);
 		user.setPassword("Password");
 		user.setDateRegistered(LocalDateTime.now());
 
@@ -54,6 +59,7 @@ class SpringDockerApplicationTests {
 		newUser.setLastName("Test");
 		newUser.setUserName("test" + randomId);
 		newUser.setEmail("test" + randomId + "@test.test");
+		newUser.setRole(UserRole.SuperAdmin);
 		newUser.setPassword("Password");
 		newUser.setDateRegistered(LocalDateTime.now());
 
