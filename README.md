@@ -7,9 +7,9 @@ Dockerized Spring Boot CRUD API with PostgreSQL
 - [x] Docker
     - [x] Dockerfile
     - [x] docker-compose.yml
-- [ ] GitHub Actions
+- [x] GitHub Actions
     - [x] Workflow file
-    - [ ] Todo fix H2 in-memory DB
+    - [x] Todo fix H2 in-memory DB
 - [x] JWT
 - [x] Bcrypt
 - [x] DB Migration
