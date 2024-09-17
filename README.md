@@ -1,6 +1,15 @@
-# Apollotech Training: Learning Docker and Docker Compose
+# Spring Boot Practice
 
 Dockerized Spring Boot CRUD API with PostgreSQL
+
+## Stacks
+
+- Spring Boot
+- PostgreSQL
+- Docker
+- Git, GitHub, GitHub Actions
+
+## TODO
 
 - [x] Spring Security
 - [x] Authentication
@@ -11,10 +20,15 @@ Dockerized Spring Boot CRUD API with PostgreSQL
     - [x] Workflow file
     - [x] Todo fix H2 in-memory DB
 - [x] JWT
+    - [x] Access Token
+    - [x] Refresh Token
 - [x] Bcrypt
 - [x] DB Migration
 - [x] Table relationship
+- [ ] Kubernetes
 
+
+## Setup
 
 ```bash
 # Pull the Spring Boot project Docker image from GHCR.
@@ -27,12 +41,14 @@ cp env.example .env
 # Build and Spring Boot project and Postgres.
 docker compose up -d
 
+
 # Run tests
-mvn clean && mvn -Dtest=SpringDockerApplicationTests test
+mvn -DTest=SpringDockerApplicationTests test
+
 
 # Build without running the tests
 mvn clean install -Dmaven.test.skip=true -q
 
 # Run the built jar file
-javar -jar target/
+javar -jar target/spring-docker-0.0.1-SNAPSHOT.jar
 ```
