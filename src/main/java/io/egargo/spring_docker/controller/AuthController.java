@@ -2,18 +2,19 @@ package io.egargo.spring_docker.controller;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.egargo.spring_docker.model.UserLogin;
 import io.egargo.spring_docker.service.AuthService;
+import io.egargo.spring_docker.utils.JwtUtil;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -21,17 +22,24 @@ public class AuthController {
 	@Autowired
 	AuthService authService;
 
+	@Autowired
+	JwtUtil jwtUtil;
+
 	@PostMapping(value = "/login", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<?> login(@RequestBody UserLogin userLogin) {
 		try {
-			Optional<HashMap<String, String>> result = authService.login(userLogin);
+			return authService.login(userLogin);
+		} catch (Exception e) {
+			return new ResponseEntity<>(
+					Collections.singletonMap("message", "An unexpected error occurred"),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
-			if (result.isEmpty()) {
-				return new ResponseEntity<>(Collections.singletonMap("message", "Incorrect username and/or password"),
-						HttpStatus.NOT_FOUND);
-			}
-
-			return new ResponseEntity<>(Collections.singletonMap("data", result), HttpStatus.OK);
+	@PostMapping(value = "/refresh", produces = "application/json")
+	public ResponseEntity<?> refresh(@RequestHeader HashMap<String, String> header) {
+		try {
+			return authService.refresh(header.get("refreshtoken"));
 		} catch (Exception e) {
 			return new ResponseEntity<>(
 					Collections.singletonMap("message", "An unexpected error occurred"),
