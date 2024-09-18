@@ -42,7 +42,7 @@ Dockerized Spring Boot CRUD API with PostgreSQL
 - [x] Docker
     - [x] Dockerfile
     - [x] docker-compose.yml
-- [ ] Kubernetes
+- [x] Kubernetes
 
 
 ## Setup
