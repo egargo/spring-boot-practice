@@ -1,0 +1,159 @@
+# Postgres ConfigMap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-secret
+  labels:
+    app: postgres
+data:
+  POSTGRES_DB: ${DATABASE_DB}
+  POSTGRES_USER: ${DATABASE_USER}
+  POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+
+---
+
+# Postgres Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: "postgres:alpine"
+        args: [ "-c", "max_connections=1000" ]
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 5432
+        envFrom:
+          - configMapRef:
+              name: postgres-secret
+        volumeMounts:
+          - mountPath: /var/lib/postgresql/data
+            name: postgresdata
+      volumes:
+        - name: postgresdata
+          persistentVolumeClaim:
+            claimName: postgres-volume-claim
+
+---
+
+# Postgres Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  labels:
+    app: postgres
+spec:
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 5432
+      # port: 5433
+      targetPort: 5432
+  selector:
+    app: postgres
+
+---
+
+# Postgres PV
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgres-volume
+  labels:
+    type: local
+    app: postgres
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: /data/postgresql
+
+---
+
+# Postgres PVC
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-volume-claim
+  labels:
+    app: postgres
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+
+---
+
+# Spring Boot ConfigMap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spring-boot-secret
+  labels:
+    app: spring-boot
+data:
+  SPRING_DATASOURCE_URL: jdbc:postgresql://postgres.default.svc.cluster.local:5432/${DATABASE_DB}?sslmode=disable
+  SPRING_DATASOURCE_USERNAME: ${DATABASE_USER}
+  SPRING_DATASOURCE_PASSWORD: ${DATABASE_PASSWORD}
+  SPRING_SECURITY_JWT_SECRET_KEY: ${SPRING_SECURITY_JWT_SECRET_KEY}
+  SPRING_SECURITY_JWT_ACCESS_EXP: ${SPRING_SECURITY_JWT_ACCESS_EXP}
+  SPRING_SECURITY_JWT_REFRESH_EXP: ${SPRING_SECURITY_JWT_REFRESH_EXP}
+
+---
+
+# Spring Boot Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-boot
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: spring-boot
+  template:
+    metadata:
+      labels:
+        app: spring-boot
+    spec:
+      containers:
+        - name: spring-boot
+          image: ghcr.io/egargo/egargo.spring-boot-crud-app
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 28279
+          envFrom:
+            - configMapRef:
+                name: spring-boot-secret
+
+---
+
+# Spring Boot Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-boot
+  labels:
+    app: spring-boot
+spec:
+  type: NodePort
+  ports:
+    - port: 28279
+  selector:
+    app: spring-boot
