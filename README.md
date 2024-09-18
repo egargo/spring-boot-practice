@@ -9,6 +9,7 @@ Dockerized Spring Boot CRUD API with PostgreSQL
     - [Spring Boot](https://spring.io/projects/spring-boot)
 - [PostgreSQL](https://www.postgresql.org/)
 - [Docker](https://docs.docker.com/engine/)
+- [Kubernetes](https://kubernetes.io/)
 - [Git](https://git-scm.com/)
 - [GitHub](https://github.com/)
     - GitHub Actions
@@ -66,4 +67,8 @@ mvn clean install -Dmaven.test.skip=true -q
 
 # Run the built jar file
 javar -jar target/spring-docker-0.0.1-SNAPSHOT.jar
+
+# Kubernetes
+kubectl apply -f secrets.yml
+kubectl apply -f deployment.yml
 ```
