@@ -48,27 +48,64 @@ Dockerized Spring Boot CRUD API with PostgreSQL
 
 ## Setup
 
-```bash
-# Pull the Spring Boot project Docker image from GHCR.
-docker pull ghcr.io/egargo/spring-boot-crud
 
-# Copy `env.example` to a new file named `.env`
-# then configure the neccessary environment variables.
+### Initial Setup
+
+Pull the Spring Boot project Docker image from GHCR:
+```bash
+docker pull ghcr.io/egargo/spring-boot-crud
+```
+
+If you are running the project in your host OS, Copy `env.example` to a new
+file named `.env` then configure the neccessary environment variables.
+Otherwise, configure the secrets.yml file:
+```bash
+# .env
 cp env.example .env
 
-# Build and Spring Boot project and Postgres.
+# secrets.yml
+vim secrets.yml
+```
+
+
+### Run with Docker
+
+```bash
+# Build and Spring Boot project and Postgres
 docker compose up -d
+```
 
-# Run tests
-mvn -DTest=SpringDockerApplicationTests test
 
-# Build without running the tests
-mvn clean install -Dmaven.test.skip=true -q
+### Run with K8s
 
-# Run the built jar file
-javar -jar target/spring-docker-0.0.1-SNAPSHOT.jar
+> [!NOTE]
+> Access spring-boot api service: <MINIKUBE_IP>:<NODEPORT>
 
-# Kubernetes
+```bash
+# Start minikube
+minikube start
+
+# Apply secrets and deployment configuration
 kubectl apply -f secrets.yml
 kubectl apply -f deployment.yml
+
+# Get the URL of spring-boot service
+minikube service spring-boot --url
+```
+
+
+### Run on host OS
+
+```bash
+# Build without running the tests and run the built jar file.
+mvn clean install -Dmaven.test.skip=true -q
+javar -jar target/spring-docker-0.0.1-SNAPSHOT.jar
+```
+
+
+### Run tests
+
+```bash
+# Run tests.
+mvn -DTest=SpringDockerApplicationTests test
 ```
