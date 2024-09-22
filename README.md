@@ -1,6 +1,6 @@
 # Spring Boot Practice
 
-Dockerized Spring Boot CRUD API with PostgreSQL
+(K8s + Docker + Spring Boot + PostgreSQL + CI) Practice
 
 
 ## Tech Stacks
@@ -83,7 +83,7 @@ docker compose up -d
 
 ```bash
 # Start minikube
-minikube start
+minikube start --cpus 4 --memory 4096
 
 # Apply secrets and deployment configuration
 kubectl apply -f secrets.yml
