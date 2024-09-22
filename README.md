@@ -28,7 +28,7 @@
 
 ## TODO
 
-- [x] API
+- [x] Spring Boot REST API
     - [x] Spring Security
     - [x] Authentication
     - [x] JWT
@@ -37,6 +37,9 @@
     - [x] Bcrypt
     - [x] DB Migration
     - [x] Table relationship
+- [Testing]
+    - [x] Integration testing
+    - [ ] Unit testing
 - [x] GitHub Actions
     - [x] Workflow file
     - [x] Todo fix H2 in-memory DB
@@ -44,6 +47,24 @@
     - [x] Dockerfile
     - [x] docker-compose.yml
 - [x] Kubernetes
+
+
+## Project Structure
+
+- Spring Boot
+    - pom.xml
+    - /src/main/java/io/egargo/spring_docker
+- Docker
+    - Dockerfile
+    - docker-compose.yml
+- Kubernetes
+    - deployment.yml
+    - secrets.yml (Template. Does not contain any configuration values)
+- Github Actions
+    - .github/workflows/test.yml
+- Others
+    - env.example
+    - Postman.json
 
 
 ## Setup
