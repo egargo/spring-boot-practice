@@ -29,7 +29,7 @@ import io.egargo.spring_docker.repository.UserRepository;
 import io.egargo.spring_docker.utils.JwtUtil;
 
 @SpringBootTest
-@TestPropertySource("classpath:application-dev.properties")
+@TestPropertySource("classpath:application-test.properties")
 class SpringDockerApplicationTests {
 	@Autowired
 	private UserRepository userRepository;
