@@ -52,19 +52,19 @@
 ## Project Structure
 
 - Spring Boot
-    - pom.xml
-    - /src/main/java/io/egargo/spring_docker
+    - [`pom.xml`](pom.xml)
+    - [`src/main/java/io/egargo/spring_docker/`](src/main/java/io/egargo/spring_docker/)
 - Docker
-    - Dockerfile
-    - docker-compose.yml
+    - [`Dockerfile`](Dockerfile)
+    - [`docker-compose.yml`](docker-compose.yml)
 - Kubernetes
-    - deployment.yml
-    - secrets.yml (Template. Does not contain any configuration values)
+    - [`deployment.yml`](deployment.yml)
+    - [`secrets.yml`](secrets.yml) (Template. Does not contain any configuration values)
 - Github Actions
-    - .github/workflows/test.yml
+    - [`.github/workflows/`](.github/workflows/)
 - Others
-    - env.example
-    - Postman.json
+    - [`env.example`](env.example)
+    - [`Postman.json`](Postman.json)
 
 
 ## Setup
