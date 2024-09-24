@@ -47,6 +47,10 @@
     - [x] Dockerfile
     - [x] docker-compose.yml
 - [x] Kubernetes
+- [ ] Email
+    - [x] Setup SMTP
+    - [ ] Send verification email
+    - [ ] Send recover account email
 
 
 ## Project Structure
