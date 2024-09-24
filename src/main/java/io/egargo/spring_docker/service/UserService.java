@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,17 +55,6 @@ public class UserService {
 		}
 	}
 
-	public ResponseEntity<?> createUser(User user) {
-		try {
-			userRepository.save(user);
-			return new ResponseEntity<>(Collections.singletonMap("message", "Successfully created user"),
-					HttpStatus.CREATED);
-		} catch (DataIntegrityViolationException e) {
-			return new ResponseEntity<>(Collections.singletonMap("message", "Username and/or email is already in use"),
-					HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-
 	@Transactional
 	public ResponseEntity<?> updateUser(Long id, UserCreateDTO userCreateDTO) {
 		try {
@@ -104,5 +92,4 @@ public class UserService {
 					HttpStatus.OK);
 		}
 	}
-
 }
