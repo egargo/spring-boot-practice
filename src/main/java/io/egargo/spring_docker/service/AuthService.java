@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -12,9 +13,13 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.egargo.spring_docker.dto.UserCheckDTO;
+import io.egargo.spring_docker.dto.UserCreateDTO;
+import io.egargo.spring_docker.mapper.UserDTOMapper;
 import io.egargo.spring_docker.model.JwtClaim;
+import io.egargo.spring_docker.model.User;
 import io.egargo.spring_docker.model.UserLogin;
 import io.egargo.spring_docker.repository.UserRepository;
+import io.egargo.spring_docker.utils.Email;
 import io.egargo.spring_docker.utils.JwtUtil;
 import io.egargo.spring_docker.utils.Password;
 import java.util.Collections;
@@ -29,6 +34,26 @@ public class AuthService {
 
 	@Autowired
 	UserRepository userRepository;
+
+	@Autowired
+	UserDTOMapper userDTOMapper;
+
+	@Autowired
+	Email email;
+
+	public ResponseEntity<?> signup(User user) {
+		try {
+			userRepository.save(user);
+			email.sendMail(user.email, "Signup", "Signup");
+
+			return new ResponseEntity<>(Collections.singletonMap("message", "Successfully created user"),
+					HttpStatus.CREATED);
+		} catch (DataIntegrityViolationException e) {
+			return new ResponseEntity<>(Collections.singletonMap("message", "Username and/or email is already in use"),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+	}
 
 	public ResponseEntity<?> login(UserLogin userLogin) {
 		Optional<UserCheckDTO> user = userRepository.checkUserLogin(userLogin.userName);
