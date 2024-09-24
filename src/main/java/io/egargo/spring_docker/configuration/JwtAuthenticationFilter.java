@@ -42,7 +42,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		map.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 		if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-			String token = authorizationHeader.split("Bearer ")[2].trim();
+			// String token = authorizationHeader.split("Bearer ")[2].trim();
+			String token = authorizationHeader.substring(7);
 			JwtClaim claim = map.convertValue(jwtUtil.extractAllClaims(token).get("data"), JwtClaim.class);
 			String username = claim.getUserName();
 			String role = claim.getRole();
