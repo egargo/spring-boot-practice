@@ -30,6 +30,7 @@
 
 - [x] Spring Boot REST API
     - [x] Spring Security
+    - [ ] OAuth 2.0
     - [x] Authentication
     - [x] JWT
         - [x] Access Token
