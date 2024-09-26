@@ -1,13 +1,15 @@
 package io.egargo.spring_docker.utils;
 
+import io.egargo.spring_docker.model.JwtClaim;
+import io.egargo.spring_docker.model.JwtType;
+
 import java.util.Date;
+import java.util.UUID;
 
 import javax.crypto.SecretKey;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
-import io.egargo.spring_docker.model.JwtClaim;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -20,24 +22,28 @@ public class JwtUtil {
 	private String tokenSecretKey;
 
 	@Value("${security.jwt.access-expiration-time}")
-	private long tokenAccessExp;
+	private Long tokenAccessExp;
 
 	@Value("${security.jwt.refresh-expiration-time}")
-	private long tokenRefreshExp;
+	private Long tokenRefreshExp;
 
-	public String generateAccessToken(final JwtClaim claim) {
-		return Jwts.builder()
-				.claim("data", claim)
-				.issuedAt(new Date(System.currentTimeMillis()))
-				.expiration(new Date(System.currentTimeMillis() + tokenAccessExp))
-				.signWith(this.getSignedKey()).compact().toString();
-	}
+	@Value("${security.jwt.issuer}")
+	private String tokenIssuer;
 
-	public String generateRefreshToken(final JwtClaim claim) {
+	@Value("${security.jwt.subject}")
+	private String tokenSubject;
+
+	public String generateToken(JwtType type, final JwtClaim claim) {
+		Long exp = (type == JwtType.Access) ? tokenAccessExp : tokenRefreshExp;
+
 		return Jwts.builder()
-				.claim("data", claim)
+				.issuer(tokenIssuer)
+				.subject(tokenSubject)
+				.expiration(new Date(System.currentTimeMillis() + exp))
+				.notBefore(new Date())
 				.issuedAt(new Date(System.currentTimeMillis()))
-				.expiration(new Date(System.currentTimeMillis() + tokenRefreshExp))
+				.id(UUID.randomUUID().toString())
+				.claim("data", claim)
 				.signWith(this.getSignedKey())
 				.compact();
 	}
