@@ -16,6 +16,7 @@ import io.egargo.spring_docker.dto.UserCheckDTO;
 import io.egargo.spring_docker.dto.UserCreateDTO;
 import io.egargo.spring_docker.mapper.UserDTOMapper;
 import io.egargo.spring_docker.model.JwtClaim;
+import io.egargo.spring_docker.model.JwtType;
 import io.egargo.spring_docker.model.User;
 import io.egargo.spring_docker.model.UserLogin;
 import io.egargo.spring_docker.repository.UserRepository;
@@ -68,8 +69,11 @@ public class AuthService {
 		claim.setEmail(user.get().email);
 		claim.setRole(user.get().role.toString());
 
-		final String accessToken = jwtUtil.generateAccessToken(claim);
-		final String refreshToken = jwtUtil.generateRefreshToken(claim);
+		final String accessToken = jwtUtil.generateToken(JwtType.Access, claim);
+		final String refreshToken = jwtUtil.generateToken(JwtType.Refresh, claim);
+
+		// final String accessToken = jwtUtil.generateAccessToken(claim);
+		// final String refreshToken = jwtUtil.generateRefreshToken(claim);
 
 		Optional<HashMap<String, String>> map = Optional.of(new HashMap<>());
 		map.get().put("accessToken", accessToken);
@@ -88,8 +92,10 @@ public class AuthService {
 		map.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 		JwtClaim claim = map.convertValue(jwtUtil.extractAllClaims(refreshToken).get("data"), JwtClaim.class);
+		System.out.println(claim);
 
-		return new ResponseEntity<>(Collections.singletonMap("accessToken", jwtUtil.generateAccessToken(claim)),
+		return new ResponseEntity<>(
+				Collections.singletonMap("accessToken", jwtUtil.generateToken(JwtType.Access, claim)),
 				HttpStatus.OK);
 	}
 }
