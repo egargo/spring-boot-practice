@@ -38,16 +38,6 @@ spring:
                     auth: false
                     starttls:
                         enable: false
-    # kafka:
-    #     consumer:
-    #         group-id: my-group-id
-    #         bootstrap-servers: localhost:9092
-    #         key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-    #         value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-    #     producer:
-    #         bootstrap-servers: localhost:9092
-    #         key-serializer: org.apache.kafka.common.serialization.StringSerializer
-    #         value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 server:
     port: 28279
     # port: 8888
@@ -64,3 +54,5 @@ security:
         secret-key: ${SPRING_SECURITY_JWT_SECRET_KEY}
         access-expiration-time: ${SPRING_SECURITY_JWT_ACCESS_EXP}
         refresh-expiration-time: ${SPRING_SECURITY_JWT_REFRESH_EXP}
+        issuer: ${SPRING_SECURITY_ISSUER}
+        subject: ${SPRING_SECURITY_SUBJECT}
