@@ -38,7 +38,9 @@
     - [x] Bcrypt
     - [x] DB Migration
     - [x] Table relationship
-- [Testing]
+- [ ] Kafka
+    - [x] Kafka Topic Consumer
+- [ ] Testing
     - [x] Integration testing
     - [ ] Unit testing
 - [x] GitHub Actions
@@ -93,6 +95,10 @@ cp env.example .env
 vim secrets.yml
 ```
 
+### Kafka
+```bash
+./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic <topic-name>
+```
 
 ### Run with Docker
 
