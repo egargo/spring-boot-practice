@@ -1,7 +1,7 @@
 services:
-    spring-db:
+    spring-boot-db:
         image: postgres:alpine
-        container_name: egargo.spring-boot-crud-db
+        container_name: egargo.spring-boot-db
         environment:
           - POSTGRES_USER=${DATABASE_USER}
           - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
@@ -19,22 +19,22 @@ services:
         image: quay.io/keycloak/keycloak:25.0.4
         container_name: egargo.spring-boot-keycloak
         environment:
-            - KEYCLOAK_ADMIN=admin
-            - KEYCLOAK_ADMIN_PASSWORD=admin
-        # command: kc.sh start-dev
+            - KEYCLOAK_ADMIN=${KEYCLOAK_ADMIN}
+            - KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_ADMIN_PASSWORD}
         command: start-dev
         ports:
             - 8080:8080
 
-    spring-boot:
-        image: ghcr.io/egargo/egargo.spring-boot-crud-app
-        container_name: egargo.spring-boot-crud-app
+    spring-boot-app:
+        image: egargo.spring-boot-app
+        container_name: egargo.spring-boot-app
         build:
             context: .
         ports:
             - 28279:28279
         depends_on:
-            - spring-db
+            - spring-boot-db
+            - kafka
         environment:
             - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
             - SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME}
@@ -43,5 +43,40 @@ services:
             - SPRING_SECURITY_JWT_ACCESS_EXP=${SPRING_SECURITY_JWT_ACCESS_EXP}
             - SPRING_SECURITY_JWT_REFRESH_EXP=${SPRING_SECURITY_JWT_REFRESH_EXP}
 
+    zookeeper:
+        image: zookeeper
+        container_name: egargo.spring-boot-zookeeper
+        hostname: zookeeper
+        environment:
+            ZOOKEEPER_CLIENT_PORT: 2181
+            ZOOKEEPER_TICK_TIME: 2000
+        network_mode: "host"
+        ports:
+            - 2181:2181
+        expose:
+            - 2181
+
+    kafka:
+        image: bitnami/kafka
+        container_name: egargo.spring-boot-kafka
+        environment:
+          - KAFKA_CFG_NODE_ID=${KAFKA_CFG_NODE_ID}
+          - KAFKA_CFG_PROCESS_ROLES=${KAFKA_CFG_PROCESS_ROLES}
+          - KAFKA_CFG_LISTENERS=${KAFKA_CFG_LISTENERS}
+          - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=${KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP}
+          - KAFKA_CFG_ADVERTISED_LISTENERS=${KAFKA_CFG_ADVERTISED_LISTENERS}
+          - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=${KAFKA_CFG_CONTROLLER_QUORUM_VOTERS}
+          - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=${KAFKA_CFG_CONTROLLER_LISTENER_NAMES}
+        volumes:
+            - egargo-kafka-data:/var/lib/kafka
+        network_mode: "host"
+        ports:
+            - 9092:9092
+        expose:
+            - 9092
+        depends_on:
+            - zookeeper
+
 volumes:
-    spring-boot-crud-data:
+    egargo-spring-boot-data:
+    egargo-kafka-data:
