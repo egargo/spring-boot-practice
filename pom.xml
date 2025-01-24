@@ -9,11 +9,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>io.egargo</groupId>
-	<artifactId>spring-docker</artifactId>
+	<artifactId>spring-boot-demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-docker</name>
+	<name>spring-boot-demo</name>
 	<packaging>jar</packaging>
-	<description>Demo project for Dockerized Spring Boot</description>
+	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -63,36 +63,17 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<version>3.3.2</version>
 			<optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.17.2</version>
-        </dependency>
-		<!-- <dependency> -->
-		<!-- 	<groupId>com.mysql</groupId> -->
-		<!-- 	<artifactId>mysql-connector-j</artifactId> -->
-		<!-- 	<version>8.0.33</version> -->
-		<!-- </dependency> -->
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.17.2</version>
+		</dependency>
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>42.7.4</version>
 		</dependency>
-		<!-- <dependency> -->
-		<!-- 	<groupId>org.springframework.kafka</groupId> -->
-		<!-- 	<artifactId>spring-kafka</artifactId> -->
-		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- 	<groupId>org.apache.kafka</groupId> -->
-		<!-- 	<artifactId>kafka-streams</artifactId> -->
-		<!-- 	<version>3.8.0</version> -->
-		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- 	<groupId>org.apache.kafka</groupId> -->
-		<!-- 	<artifactId>kafka-clients</artifactId> -->
-		<!-- 	<version>3.8.0</version> -->
-		<!-- </dependency> -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -119,9 +100,22 @@
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 		<dependency>
-		  <groupId>joda-time</groupId>
-		  <artifactId>joda-time</artifactId>
-		  <version>2.13.0</version>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.13.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+			<version>3.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 	</dependencies>
 	<build>

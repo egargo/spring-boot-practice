@@ -27,6 +27,23 @@ spring:
                     time_zone: Asia/Manila
         hibernate:
             ddl-auto: update
+    kafka:
+        bootstrap-servers: localhost:9092
+        consumer:
+            group-id: my-group-id
+        # consumer:
+        #     group-id: my-group-id
+        # producer:
+        #     retries: 0
+        # template:
+        #     default-topic: spring-topic
+        # advertised:
+        #     # listeners: PLAINTEXT://172.19.0.3:9902
+        #     listeners: PLAINTEXT://localhost:9902
+        #     # auto-offset-reset: earliest
+        #     # bootstrap-servers: localhost:9092
+        #     # key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        #     # value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
     mail:
         host: ${SPRING_MAIL_HOST}
         port: ${SPRING_MAIL_PORT}
@@ -38,7 +55,24 @@ spring:
                     auth: false
                     starttls:
                         enable: false
+
+    # security:
+    #     oauth2:
+    #         client:
+    #             provider:
+    #                 spring-docker:
+    #                     issuer: http://localhost:8080/realms/spring-docker
+    #
+    #             registration:
+    #                 keycloak:
+    #                     provider: spring-docker
+    #                     authorization-grant-type: authorization_code
+    #                     client-id: spring-docker
+    #                     client-secret: secret
+    #                     scope: openid
+
 server:
+    # address: 0.0.0.0
     port: 28279
     # port: 8888
     compression:
