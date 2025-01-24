@@ -13,7 +13,7 @@ services:
         expose:
             - ${DATABASE_PORT}
         volumes:
-            - spring-boot-crud-data:/var/lib/postgresql
+            - egargo-spring-boot-data:/var/lib/postgresql
 
     keycloak:
         image: quay.io/keycloak/keycloak:25.0.4
