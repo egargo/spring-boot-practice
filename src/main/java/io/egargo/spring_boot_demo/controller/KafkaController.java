@@ -19,7 +19,7 @@ public class KafkaController {
 	private KafkaMessageProducer kafkaMessageProducer;
 
 	@PostMapping(value = "/send", consumes = "text/plain;charset=UTF-8", produces = "application/json")
-	public ResponseEntity<?> singup(@RequestBody String message) {
+	public ResponseEntity<?> send(@RequestBody String message) {
 		try {
 			kafkaMessageProducer.sendMessage("my-topic", message);
 			return new ResponseEntity<>(
